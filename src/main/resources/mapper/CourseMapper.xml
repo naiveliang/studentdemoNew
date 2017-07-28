@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.studentdemo.mapper.CourseMapper">
+
+    <resultMap id="stuMap" type="com.example.studentdemo.entity.Course">
+        <id property="id" column="id" jdbcType="INTEGER" />
+    </resultMap>
+
+    <select id="getAllCourses" resultType="java.util.Map">
+        select  st.name as studentName, cl.name as className, co.subject, co.score
+        from (student st left join class cl on st.cid=cl.id) left join course co on st.id=co.uid
+        <!--
+           此查询涉及到三个表，查询结果为多条记录，每条记录为一个Map，所以resultTpye=java.util.Map。
+           如：{"score":"80","classname":"初一2班","subject":"数学","stuname":"刘星"}，我们只用规定好resultType，即可获得这样的结果
+        -->
+    </select>
+
+    <select id="getAllCourseSubject" resultType="String">
+        select  distinct subject from course
+    </select>
+
+    <select id="getAllScoreByCourseName" resultType="java.util.Map"  parameterType="String">
+        select co.score, st.name  from course co left join student st on co.uid=st.id where co.subject=#{subject} order by co.score DESC
+    </select>
+
+    <!--<select id="getLikeSearchResults" resultType="java.util.Map" parameterType="String">-->
+      <!--select  st.name as stuname, cl.name as classname, co.subject, co.score-->
+      <!--from (student st left join class cl on st.cid=cl.id) left join course co on st.id=co.uid-->
+      <!--where st.name like '%${str}%' or cl.name like '%${str}%' or co.subject like '%${str}%'-->
+    <!--</select>-->
+
+    <select id="getLikeSearchResults" resultType="java.util.Map" parameterType="String">
+        select  st.name as stuname, cl.name as classname, co.subject, co.score
+        from (student st left join class cl on st.cid=cl.id) left join course co on st.id=co.uid
+        where
+        <choose>
+            <when test="searchMethod == 'name'">
+                st.name like '%${searchContent}%'
+            </when>
+            <when test="searchMethod == 'class'">
+                cl.name like '%${searchContent}%'
+            </when>
+            <otherwise>
+                co.subject like '%${searchContent}%'
+            </otherwise>
+        </choose>
+    </select>
+
+    <delete id="deleteByStudentId" parameterType="Integer">
+        delete from course where uid=#{id}
+    </delete>
+
+
+</mapper>

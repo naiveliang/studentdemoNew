@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/common/seajs/seajs/2.2.1/sea.js"></script><!--引入seajs必须在引入config.js之前，否则会找不到seajs-->
+    <script type="text/javascript" src="../js/common/config.js"></script>
+</head>
+<body>
+    <div style="height: 150pt">
+        班级：
+        <select id="selectClass">
+            <option value='0'>请选择</option>
+        </select>
+        <br>
+        姓名：<input type="text" id="name">（可选）<br>
+        年龄：<input type="text" id="age">（可选）<br>
+        性别：<input type="text" id="sex">（可选）<br>
+        地址：<input type="text" id="address">（可选）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" id="insertButton">添加</button><br>
+        <span id="updateResult" style="color: red "></span>
+    </div>
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>学号</th>
+                <th>班级</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>地址</th>
+            </tr>
+            </thead>
+            <tbody id="studentBody">
+
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        var timestamp = new Date().getTime();
+        seajs.use("/js/my/student.js?v=" + timestamp);
+    </script>
+</body>
+</html>

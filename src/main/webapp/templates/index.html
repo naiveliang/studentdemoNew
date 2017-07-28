@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/seajs/seajs/2.2.1/sea.js"></script>
+    <script type="text/javascript" src="../js/my/config.js"></script>
+</head>
+<body>
+    <div style="height: 100pt">
+        请输入要查询学生的学号：<input type="text" id="searchInput" >&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" id="searchButton">查询</button><br>
+        <span id="searchResult" style="color: red "></span>
+    </div>
+
+    <div style="height: 150pt">
+        请先输入要修改学生的学号：<input type="text" id="updateInputId"><br>
+        请在下面输入需要修改的信息：<br>
+        班级：
+        <select id="updateSelect">
+            <option value='0'>请选择</option>
+        </select>
+        <br>
+        姓名：<input type="text" id="updateInputName">（可选）<br>
+        年龄：<input type="text" id="updateInputAge">（可选）<br>
+        性别：<input type="text" id="updateInputSex">（可选）<br>
+        地址：<input type="text" id="updateInputAddress">（可选）&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" id="updateButton">提交</button><br>
+        <span id="updateResult" style="color: red "></span>
+    </div>
+    <div style="height: 150pt">
+        请输入学生信息：<br>
+        班级：
+        <select id="insertSelect">
+            <option value='0'>请选择</option>
+        </select><br>
+        姓名：<input type="text" id="insertInputName"><br>
+        年龄：<input type="text" id="insertInputAge"><br>
+        性别：<input type="text" id="insertInputSex"><br>
+        地址：<input type="text" id="insertInputAddress">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" id="insertButton">提交</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button" id="clearInsert">清空</button>
+        <br>
+        <span id="insertResult" style="color: red "></span>
+    </div>
+    <div style="height: 50pt">
+        请输入要删除学生的id：<input type="text" id="deleteInputId"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" id="deleteButton">删除</button><br>
+        <span id="deleteResult" style="color: red "></span>
+    </div>
+
+    <div>
+        <input type="image" id="" />
+
+    </div>
+
+    <script type="text/javascript">
+        var timestamp = new Date().getTime();
+        seajs.use("/js/index.js?v=" + timestamp);
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../js/common/seajs/seajs/2.2.1/sea.js"></script><!--引入seajs必须在引入config.js之前，否则会找不到seajs-->
+    <script type="text/javascript" src="../js/common/config.js"></script>
+
+</head>
+<body onkeydown="checkKeyDown()">
+    <div >
+        <p><h1>设置cookie</h1></p>
+        姓名：<input type="text" id="name"><br>
+        年龄：<input type="text" id="age"><br>
+        <button type="button" id="setCookieButton">设置cookie</button>
+    </div>
+    <p>***************************************************************</p>
+    <div>
+        <h1>使用select2</h1>
+        <input id='selectTemp' type="text" ><br>
+        <p>
+            <select id="selectExample">
+                <option>你好</option>
+                <option>它好</option>
+                <option>我好</option>
+            </select>
+        </p>
+        <button type="button" id="selectButton" onclick="alert($('#selectTemp').val());">获得下拉框的值</button>
+    </div>
+    <p>***************************************************************</p>
+    <div id="allDiv">
+        <h1>title：div的隐藏与显示</h1>
+        <div id="message"><h2><a href="##" id="studentHref">学生</a></h2></div>
+        <div id="studentDiv" style="display:none">
+            <!--<div> <a href="#" id="#11">评论</a></div>-->
+            <!--<div> <a href="#" id="#12">留言</a></div>-->
+            <!--<div> <a href="#" id="#13">转载</a></div>-->
+            <!--<div> <a href="#" id="#14">关注</a></div>-->
+        </div>
+        <div id="myinfo"><h2><a href="##" id="courseHref">课程</a></h2></div>
+        <div id="courseDiv" style="display:none">
+            <!--<div> <a href="#" id="#21">姓名</a></div>-->
+            <!--<div> <a href="#" id="#22">年龄</a></div>-->
+            <!--<div> <a href="#" id="#23">性别</a></div>-->
+            <!--<div> <a href="#" id="#24">地址</a></div>-->
+        </div>
+    </div>
+    <div id="contentDiv" style="height: 100pt"></div>
+
+    <script type="text/javascript">
+        //文本框输入完成按回车键触发button按钮
+        //Internet Explorer/Chrome 浏览器使用 event.keyCode 取回被按下的字符，而 Netscape/Firefox/Opera 等浏览器使用 event.which。
+        function checkKeyDown(){
+            if(event.keyCode==13){
+                $("#setCookieButton").click();
+            }
+        }
+        seajs.use("../js/my/test01.js?"+(new Date()).getTime());
+    </script>
+</body>
+</html>

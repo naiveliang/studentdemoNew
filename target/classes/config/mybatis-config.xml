@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "../template/mybatis-3-config.dtd">
+<!--此文件为mybatis的配置文件，主要是用来设置别名的，这些别名在sql语句中能够用到-->
+<configuration>
+    <settings>
+        <!-- log4j.properties的配置，用于打印SQL语句及结果到控制台，便于调试 -->
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
+    <!-- 命名空间 -->
+    <typeAliases>
+        <typeAlias alias="StudentBean" type="com.example.studentdemo.entity.Student" />
+        <typeAlias alias="ClassBean" type="com.example.studentdemo.entity.Classes" />
+        <typeAlias alias="CourseBean" type="com.example.studentdemo.entity.Course" />
+    </typeAliases>
+
+
+</configuration>

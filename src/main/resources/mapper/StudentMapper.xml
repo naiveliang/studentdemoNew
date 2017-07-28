@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.studentdemo.mapper.StudentMapper">
+
+    <resultMap id="stuMap" type="com.example.studentdemo.entity.Student"><!--结果映射，与数据库表中的列一一对应-->
+        <id property="id" column="id" jdbcType="INTEGER" />  <!--id标签，标识主键列；整数类型必须用Integer，不能用INT-->
+        <result property="cid" column="cid" jdbcType="INTEGER" />  <!--result标签，标识非主键列-->
+        <result property="name" column="name" jdbcType="VARCHAR" />
+        <result property="age" column="age" jdbcType="VARCHAR" />
+        <result property="sex" column="sex" jdbcType="VARCHAR" />
+        <result property="address" column="address" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="isExist" resultType="Integer"><!--id为mapper中的方法名，必须相同；resultType为返回类型，即sql语句的返回值类型-->
+        select id from student where id=#{id}  <!-- #{id}这个id是isExist方法的参数-->
+    </select>
+
+    <select id="getStudentById" resultType="java.util.Map" parameterType="Integer"><!--设定返回类型为Map，mybatis会自动把结果组装成Map形式来返回-->
+        select st.*, cl.name as className from student st,class cl where st.id = #{id} and st.cid = cl.id
+        <!--select a.*, b.name from student a left join class b on(a.cid=b.id) where id = #{id}-->
+    </select>
+
+    <select id="getAllStudents" resultType="java.util.Map">
+        select st.*, cl.name as className from student st left join class cl on(st.cid=cl.id)
+    </select>
+
+    <update id="updateStudent" parameterType="StudentBean"><!--这里的StudentBean就是在mybatis-config.xml文件中设置的别名-->
+        UPDATE student
+        <set>
+            <if test="cid!=''">cid=#{cid},</if>  <!-- 判断前台过来的cid是否为空，如果不空，则修改 -->
+            <if test="name!=''"> name=#{name},</if>
+            <if test="age!=''"> age=#{age},</if>
+            <if test="sex!=''"> sex=#{sex},</if>
+            <if test="address!=''"> address=#{address}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <insert id="insertStudent" parameterType="StudentBean">
+        insert into student values(null ,#{cid},#{name},#{age},#{sex},#{address}) <!--因为id主键在建表时设置为auto_increment，所以它是不用设置的，但不能不写，所以写成NULL-->
+    </insert>
+
+    <delete id="deleteStudent" parameterType="Integer">
+        delete from student where id=#{id}
+    </delete>
+
+
+
+</mapper>
